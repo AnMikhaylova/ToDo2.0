@@ -1,17 +1,17 @@
 (function () {
   // создаем и возвращаем заголовок приложения
   function createAppTitle(title) {
-    let appTitle = document.createElement("h2");
+    const appTitle = document.createElement("h2");
     appTitle.innerHTML = title;
     return appTitle;
   }
 
   // создаем и возвращаем форму для создания дела
   function createTodoItemForm() {
-    let form = document.createElement("form");
-    let input = document.createElement("input");
-    let buttonWrapper = document.createElement("div");
-    let button = document.createElement("button");
+    const form = document.createElement("form");
+    const input = document.createElement("input");
+    const buttonWrapper = document.createElement("div");
+    const button = document.createElement("button");
 
     form.classList.add("input-group", "mb-3");
     input.classList.add("form-control");
@@ -34,22 +34,22 @@
 
   // кнопки с доп функционалом 
   function createButtons(windowList, arr, key) {
-    let buttonWrapper = document.createElement("div");
+    const buttonWrapper = document.createElement("div");
     buttonWrapper.classList = "mt-3";
 
-    let evenBtn = document.createElement("button");
+    const evenBtn = document.createElement("button");
     evenBtn.classList.add("btn", "btn-outline-primary", "mr-2");
     evenBtn.textContent = "Чётные элементы";
 
-    let ovenBtn = document.createElement("button");
+    const ovenBtn = document.createElement("button");
     ovenBtn.classList.add("btn", "btn-outline-primary", "mr-2");
     ovenBtn.textContent = "Нечётные элементы";
 
-    let delFirst = document.createElement("button");
+    const delFirst = document.createElement("button");
     delFirst.classList.add("btn", "btn-outline-primary", "mr-2");
     delFirst.textContent = "Удалить первый";
 
-    let delLast = document.createElement("button");
+    const delLast = document.createElement("button");
     delLast.classList.add("btn", "btn-outline-primary");
     delLast.textContent = "Удалить последний";
 
@@ -102,18 +102,18 @@
 
   // создаем и возвращаем список элементов
   function createTodoList() {
-    let list = document.createElement("ul");
+    const list = document.createElement("ul");
     list.classList.add("list-group");
     return list;
   }
 
   // создаем и возвращаем элемент списка (элемент + кнопки)
   function createTodoItem(task, key, arr) {
-    let item = document.createElement("li");
+    const item = document.createElement("li");
     // кнопки помещаем в элемент, который красиво покажет их в одной группе
-    let buttonGroup = document.createElement("div");
-    let doneButton = document.createElement("button");
-    let deleteButton = document.createElement("button");
+    const buttonGroup = document.createElement("div");
+    const doneButton = document.createElement("button");
+    const deleteButton = document.createElement("button");
 
     // устанавливаем стили для элемента списка, а также для размещения кнопок
     // в его правой части с поомщью flex
@@ -167,7 +167,7 @@
       if (confirm("Вы уверены?")) {
         item.remove();
 
-        let index = arr.findIndex((el) => el.name === task.name);
+        const index = arr.findIndex((el) => el.name === task.name);
 
         if (index !== -1) {
           arr.splice(index, 1);
@@ -186,7 +186,7 @@
       return 0; // обработка пустого массива или неправильного входного значения
     }
 
-    var maxId = arr.reduce(function (prev, current) {
+    const maxId = arr.reduce(function (prev, current) {
       return current.id > prev ? current.id : prev;
     }, arr[0].id);
 
@@ -195,18 +195,18 @@
 
   // ------------------------ работа с localstorage --------------------
   function readTasks(key) {
-    let storage = localStorage.getItem(key);
+    const storage = localStorage.getItem(key);
     return storage ? JSON.parse(storage) : [];
   }
 
   function writeTasks(key, data) {
-    let json = JSON.stringify(data);
+    const json = JSON.stringify(data);
     localStorage.setItem(key, json);
   }
 
   // восстановление данных из localstorage в виде DOM-элементов списка
   function readAppendStorage(key, arr, windowList) {
-    let storageData = readTasks(key);
+    const storageData = readTasks(key);
     if (storageData.length !== 0) {
       arr = storageData.slice();
 
@@ -259,12 +259,12 @@
       if (todoItemForm.input.value.trim() === "") {
         return;
       }
-      let task = {
+      const task = {
         id: setMaxId(tasks),
         name: todoItemForm.input.value.trim(),
         done: false,
       };
-      let todoItem = createTodoItem(task, listName, tasks);
+      const todoItem = createTodoItem(task, listName, tasks);
 
       // создаем и добавлям в список новое дело с названием из поля для ввода
       todoList.append(todoItem);
